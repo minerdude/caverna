@@ -82,8 +82,8 @@ inicialconf
 
 #Compilacao do Stak
 stakmake
-FUNC_RETURN = $?
-if [ "$FUNC_RETURN" = "0" ]; then
+retorno = $?
+if [ "$retorno" = "0" ]; then
 	echo -e "\n\nXMR-Stak-CPU Compilado!"
 	sleep 1
 else
@@ -93,8 +93,8 @@ fi
 echo -e "\n\nAgora as configuracoes finais."
 #Sysctl
 confsysctl
-FUNC_RETURN = $?
-if [ "$FUNC_RETURN" = "0" ]; then
+retorno = $?
+if [ "$retorno" = "0" ]; then
 	echo -e "\nSysctl configurado!"
 	sleep 1
 else
@@ -104,8 +104,8 @@ fi
 
 #Limits
 limitsconf
-FUNC_RETURN = $?
-if [ "$FUNC_RETURN" = "0" ]; then
+retorno = $?
+if [ "$retorno" = "0" ]; then
 	echo -e "\nLimits.conf configurado!"
 	sleep 1
 else
