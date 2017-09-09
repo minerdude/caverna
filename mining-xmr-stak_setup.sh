@@ -72,7 +72,7 @@ else
 fi
 }
 
-tput setaf 7 ; tput setab 6 ; tput bold ; printf '%35s%s%-20s\n' "Configuracao Inicial do VPS Mining\n" ; tput sgr0
+tput setaf 7 ; tput setab 6 ; tput bold ; printf '%35s%s%-20s\n' "Configuracao Inicial do VPS Mining" ; tput sgr0
 tput setaf 3 ; tput bold ; echo -e "Este script ira compilar o xmr-stak-cpu, fazer configuracoes no sysctl.conf e\n" ; tput sgr0
 tput setaf 3 ; tput bold ; echo -e "/etc/security/limits.conf e instalar alguns pacotes uteis.\n" ; tput sgr0
 tput setaf 3 ; tput bold ; echo -e "A instalacao iniciara em 3 segundos\n\n" ; tput sgr0 ; sleep 3
