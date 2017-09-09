@@ -82,7 +82,7 @@ inicialconf
 
 #Compilacao do Stak
 stakmake
-retorno = $?
+retorno=$?
 if [ "$retorno" = "0" ]; then
 	echo -e "\n\nXMR-Stak-CPU Compilado!"
 	sleep 1
@@ -93,7 +93,7 @@ fi
 echo -e "\n\nAgora as configuracoes finais."
 #Sysctl
 confsysctl
-retorno = $?
+retorno=$?
 if [ "$retorno" = "0" ]; then
 	echo -e "\nSysctl configurado!"
 	sleep 1
@@ -104,7 +104,7 @@ fi
 
 #Limits
 limitsconf
-retorno = $?
+retorno=$?
 if [ "$retorno" = "0" ]; then
 	echo -e "\nLimits.conf configurado!"
 	sleep 1
