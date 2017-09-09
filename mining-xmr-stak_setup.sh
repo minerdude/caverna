@@ -75,7 +75,7 @@ fi
 tput setaf 7 ; tput setab 6 ; tput bold ; printf '%35s%s%-20s\n' "Configuracao Inicial do VPS Mining\n" ; tput sgr0
 tput setaf 3 ; tput bold ; echo -e "Este script ira compilar o xmr-stak-cpu, fazer configuracoes no sysctl.conf e\n" ; tput sgr0
 tput setaf 3 ; tput bold ; echo -e "/etc/security/limits.conf e instalar alguns pacotes uteis.\n" ; tput sgr0
-tput setaf 3 ; tput bold ; echo -e "A instalação iniciará em 3 segundos\n\n" ; tput sgr0 ; sleep 3
+tput setaf 3 ; tput bold ; echo -e "A instalacao iniciara em 3 segundos\n\n" ; tput sgr0 ; sleep 3
 
 FUNC_RETURN = "0"
 
@@ -83,7 +83,7 @@ FUNC_RETURN = "0"
 inicialconf
 
 #Compilacao do Stak
-FUNC_RETURN = stakmake
+"$FUNC_RETURN" = stakmake
 if [ "$FUNC_RETURN" = "0" ]; then
 	echo -e "\n\nXMR-Stak-CPU Compilado!"
 	sleep 1
@@ -93,7 +93,7 @@ else
 fi
 echo -e "\n\nAgora as configuracoes finais."
 #Sysctl
-FUNC_RETURN = confsysctl
+"$FUNC_RETURN" = confsysctl
 if [ "$FUNC_RETURN" = "0" ]; then
 	echo -e "\nSysctl configurado!"
 	sleep 1
@@ -103,7 +103,7 @@ else
 fi
 
 #Limits
-FUNC_RETURN = limitsconf
+"$FUNC_RETURN" = limitsconf
 if [ "$FUNC_RETURN" = "0" ]; then
 	echo -e "\nLimits.conf configurado!"
 	sleep 1
@@ -114,5 +114,5 @@ fi
 
 echo -e "\nFinalizado!"
 echo -e "\nAgora voce precisa ajustar as configuracoes do config.txt do xmr-stak."
-echo -e "\nAntes, reinicie a VPS para que as configurações facam efeito!\n"
-echo -e "\nAte mais!\n
+echo -e "\nAntes, reinicie a VPS para que as configuracoes facam efeito!\n"
+echo -e "\nAte mais!\n"
