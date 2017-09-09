@@ -6,7 +6,7 @@ function inicialconf ()
 local resposta="s"
 echo -e "Instalacao de pacotes necessarios...\n"
 sleep 1
-sudo apt update && sudo apt install unattended-upgrades nano git htop screen  build-essential cmake libssl-dev libhwloc-dev -y
+sudo apt update && sudo apt install unattended-upgrades nano git htop screen build-essential cmake libssl-dev libhwloc-dev -y
 sudo sed -i 's/#startup_message.*/startup_message off/' /etc/screenrc
 sudo sed -i 's/.*\${distro_id}:\${distro_codename}-updates.*/\t"\${distro_id}:\${distro_codename}-updates";/' /etc/apt/apt.conf.d/50unattended-upgrades
 # read USERNAME -p "Informe nome do usuário a criar: "
@@ -19,7 +19,7 @@ sudo sed -i 's/.*\${distro_id}:\${distro_codename}-updates.*/\t"\${distro_id}:\$
 # sudo sed -i 's/PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd_config
 echo -e "alias update='sudo apt update'\nalias upgrade='sudo apt upgrade'\nalias clean='sudo apt clean && sudo apt autoclean && sudo apt autoremove'\nalias xmr='./xmr-stak config.txt'\nalias upgradable='apt list --upgradable'" | tee -a ~/.bash_aliases
 source .bashrc
-sudo service ssh restart
+# sudo service ssh restart
 return $?
 }
 
@@ -115,4 +115,4 @@ fi
 echo -e "\nFinalizado!"
 echo -e "\nAgora voce precisa ajustar as configuracoes do config.txt do xmr-stak."
 echo -e "\nAntes, reinicie a VPS para que as configurações facam efeito!\n"
-echo -e "\nAte mais!\n"
+echo -e "\nAte mais!\n
