@@ -77,13 +77,12 @@ tput setaf 3 ; tput bold ; echo -e "Este script ira compilar o xmr-stak-cpu, faz
 tput setaf 3 ; tput bold ; echo -e "/etc/security/limits.conf e instalar alguns pacotes uteis.\n" ; tput sgr0
 tput setaf 3 ; tput bold ; echo -e "A instalacao iniciara em 3 segundos\n\n" ; tput sgr0 ; sleep 3
 
-FUNC_RETURN = "0"
-
 #Configuração inicial
 inicialconf
 
 #Compilacao do Stak
-"$FUNC_RETURN" = stakmake
+stakmake
+FUNC_RETURN = $?
 if [ "$FUNC_RETURN" = "0" ]; then
 	echo -e "\n\nXMR-Stak-CPU Compilado!"
 	sleep 1
@@ -93,7 +92,8 @@ else
 fi
 echo -e "\n\nAgora as configuracoes finais."
 #Sysctl
-"$FUNC_RETURN" = confsysctl
+confsysctl
+FUNC_RETURN = $?
 if [ "$FUNC_RETURN" = "0" ]; then
 	echo -e "\nSysctl configurado!"
 	sleep 1
@@ -103,7 +103,8 @@ else
 fi
 
 #Limits
-"$FUNC_RETURN" = limitsconf
+limitsconf
+FUNC_RETURN = $?
 if [ "$FUNC_RETURN" = "0" ]; then
 	echo -e "\nLimits.conf configurado!"
 	sleep 1
