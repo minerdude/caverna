@@ -1,1 +1,1 @@
-# Nessa caverna você pode encontrar alguna tesouros escondidos ou alguma coisa assustadoramente mortal.
+# Nessa caverna você pode encontrar alguns tesouros escondidos ou alguma coisa assustadoramente mortal.
