@@ -6,22 +6,24 @@ tput setaf 3 ; tput bold ; echo -e "A instalação iniciará em 3 segundos\n\n" 
 
 #XMR-Stak-CPU compiling
 cd ~
-curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash && \
+if hash nodejs 2>/dev/null; then
+	curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash && \
+	sudo npm -g install pm2 && wget https://github.com/minerdude/caverna/raw/master/stak.json
+fi
 sudo apt update && sudo apt install build-essential cmake libssl-dev libhwloc-dev nano git htop screen nodejs -y && \
-sudo npm -g install pm2 && wget https://github.com/minerdude/caverna/raw/master/stak.json
 sudo sed -i 's/#startup_message.*/startup_message off/' /etc/screenrc
 sudo sed -i 's/.*\${distro_id}:\${distro_codename}-updates.*/\t"\${distro_id}:\${distro_codename}-updates";/' /etc/apt/apt.conf.d/50unattended-upgrades
-git clone -b dev https://github.com/fireice-uk/xmr-stak-cpu && cd xmr-stak-cpu && \
+git clone -b dev https://github.com/fireice-uk/xmr-stak && cd xmr-stak && \
 sed -i 's/constexpr double fDevDonationLevel.*/constexpr double fDevDonationLevel = 0.0;/' donate-level.h
-cmake .  -DMICROHTTPD_ENABLE=OFF  && \
+cmake ..  -DMICROHTTPD_ENABLE=OFF -DXMR-STAK_CURRENCY=monero -DCPU_ENABLE=ON -DOpenCL_ENABLE=OFF -DCUDA_ENABLE=OFF && \
 make -j $(nproc) install
 if [ $? != 0 ]; then
 	echo -e "\nErro ao compilar! \nError exit code: $?" >&2
 	exit 1
 else
-	echo -e "\nXMR-Stak-CPU Compilado!\n"
+	echo -e "\nXMR-Stak Compilado!\n"
 fi
-cp bin/xmr-stak-cpu ~/xmr-stak
+cp bin/xmr-stak ~/
 sleep 1
 
 echo -e "Agora as configuracoes finais.\n"
@@ -52,4 +54,7 @@ else
 fi
 
 echo -e "\nFinalizado!\n"
-echo "Agora 
+echo "Agora voce precisa ajustar as configuracoes do config.txt do xmr-stak."
+echo "Antes, reinicie a VPS para que as configurações façam efeito!\n"
+echo -e "Ate mais!\n"
+exit 0
