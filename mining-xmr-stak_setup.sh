@@ -13,7 +13,11 @@ fi
 sudo apt update && sudo apt install build-essential cmake libssl-dev libhwloc-dev nano git htop screen nodejs -y && \
 sudo sed -i 's/#startup_message.*/startup_message off/' /etc/screenrc
 sudo sed -i 's/.*\${distro_id}:\${distro_codename}-updates.*/\t"\${distro_id}:\${distro_codename}-updates";/' /etc/apt/apt.conf.d/50unattended-upgrades
-git clone -b dev https://github.com/fireice-uk/xmr-stak && cd xmr-stak && \
+if [ -d xmr-stak ]; then
+	echo -e "Diretório xmr-stak ja existe."
+else
+	git clone -b dev https://github.com/fireice-uk/xmr-stak && cd xmr-stak && \
+fi
 sed -i 's/constexpr double fDevDonationLevel.*/constexpr double fDevDonationLevel = 0.0;/' xmrstak/donate-level.hpp
 cmake . -DMICROHTTPD_ENABLE=OFF -DXMR-STAK_CURRENCY=monero -DCPU_ENABLE=ON -DOpenCL_ENABLE=OFF -DCUDA_ENABLE=OFF && \
 make -j $(nproc) install
