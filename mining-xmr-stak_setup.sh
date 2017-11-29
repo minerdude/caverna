@@ -6,7 +6,7 @@ tput setaf 3 ; tput bold ; echo -e "A instalação iniciará em 3 segundos\n\n" 
 
 #XMR-Stak-CPU compiling
 cd ~
-if hash nodejs 2>/dev/null; then
+if ! hash nodejs 2>/dev/null; then
 	curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash && \
 	sudo npm -g install pm2 && wget https://github.com/minerdude/caverna/raw/master/stak.json
 fi
@@ -23,7 +23,7 @@ if [ $? != 0 ]; then
 else
 	echo -e "\nXMR-Stak Compilado!\n"
 fi
-cp bin/xmr-stak ~/
+cp bin/xmr-stak ~/stak
 sleep 1
 
 echo -e "Agora as configuracoes finais.\n"
@@ -31,9 +31,12 @@ sleep 1
 
 #Aliases
 cd ~
-echo -e "alias update='sudo apt update'\nalias upgrade='sudo apt upgrade'\nalias clean='sudo apt clean && sudo apt autoclean && sudo apt autoremove'\nalias upgradable='apt list --upgradable'\nalias xmrstart='pm2 start stak.json'\nalias xmrstop='pm2 stop stak'" | tee -a ~/.bash_aliases
-source .bashrc
-
+if grep -q "#alias-xmr" .bash_aliases; then
+	echo -e "\nAliases ja configurado."
+else
+	echo -e "#alias-xmr\nalias update='sudo apt update'\nalias upgrade='sudo apt upgrade'\nalias clean='sudo apt clean && sudo apt autoclean && sudo apt autoremove'\nalias upgradable='apt list --upgradable'\nalias xmrstart='pm2 start stak.json'\nalias xmrstop='pm2 stop stak'" | tee -a ~/.bash_aliases
+	source .bashrc
+fi
 #Sysctl Conf
 if [  -f "/etc/sysctl.d/99-xmrmining.conf" ]; then
 	echo -e "\nSysconf já configurado anteriormente."
