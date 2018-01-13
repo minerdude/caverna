@@ -1,7 +1,7 @@
 {
   "apps": [
     {
-      "name": "stak",
+      "name": "xmrstak",
       "cwd": ".",
       "script": "~/./xmr-stak",
       "node_args": [],
