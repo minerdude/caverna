@@ -15,6 +15,7 @@ sudo sed -i 's/#startup_message.*/startup_message off/' /etc/screenrc
 sudo sed -i 's/.*\${distro_id}:\${distro_codename}-updates.*/\t"\${distro_id}:\${distro_codename}-updates";/' /etc/apt/apt.conf.d/50unattended-upgrades
 if [ -d xmr-stak ]; then
 	echo -e "\nDiretório xmr-stak ja existe."
+	rm -rf xmr-stak
 else
 	git clone -b dev https://github.com/fireice-uk/xmr-stak && cd xmr-stak
 fi
@@ -28,6 +29,7 @@ else
 	echo -e "\nXMR-Stak Compilado!\n"
 fi
 cp bin/xmr-stak ~/xmrstak
+wget -P ~/ https://github.com/minerdude/caverna/raw/master/stak.json
 sleep 1
 
 echo -e "Agora as configuracoes finais.\n"
