@@ -19,7 +19,6 @@ else
 	git clone -b dev https://github.com/fireice-uk/xmr-stak && cd xmr-stak
 fi
 sed -i 's/constexpr double fDevDonationLevel.*/constexpr double fDevDonationLevel = 0.0;/' xmrstak/donate-level.hpp
-mkdir build && cd build
 cmake . -DMICROHTTPD_ENABLE=OFF -DXMR-STAK_CURRENCY=monero -DCPU_ENABLE=ON -DOpenCL_ENABLE=OFF -DCUDA_ENABLE=OFF && \
 make -j $(nproc) install
 if [ $? != 0 ]; then
@@ -28,7 +27,7 @@ if [ $? != 0 ]; then
 else
 	echo -e "\nXMR-Stak Compilado!\n"
 fi
-cp xmr-stak ~/xmrstak
+cp bin/xmr-stak ~/xmrstak
 sleep 1
 
 echo -e "Agora as configuracoes finais.\n"
@@ -62,7 +61,7 @@ else
 fi
 
 echo -e "\nFinalizado!\n"
-echo "Agora voce precisa ajustar as configuracoes do config.txt do xmr-stak."
-echo "Antes, reinicie a VPS para que as configurações façam efeito!\n"
-echo -e "Ate mais!\n"
+echo "Agora voce precisa ajustar as configuracoes do xmr-stak."
+./xmrstak
+echo -e "\nAte mais!\n"
 exit 0
