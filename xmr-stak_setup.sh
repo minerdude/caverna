@@ -6,11 +6,11 @@ tput setaf 3 ; tput bold ; echo -e "A instalação iniciará em 3 segundos\n\n" 
 
 #XMR-Stak-CPU compiling
 cd ~
-if ! hash nodejs 2>/dev/null; then
-	curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash && \
-	sudo npm -g install pm2 && wget https://github.com/minerdude/caverna/raw/master/stak.json
-fi
-sudo apt update && sudo apt install build-essential cmake libssl-dev libhwloc-dev nano git htop screen nodejs -y && \
+#if ! hash nodejs 2>/dev/null; then
+	#curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash && \
+#fi
+#sudo npm install pm2@latest -g && wget https://github.com/minerdude/caverna/raw/master/stak.json
+sudo apt update && sudo apt install build-essential cmake libssl-dev libhwloc-dev nano git htop screen -y && \
 sudo sed -i 's/#startup_message.*/startup_message off/' /etc/screenrc
 sudo sed -i 's/.*\${distro_id}:\${distro_codename}-updates.*/\t"\${distro_id}:\${distro_codename}-updates";/' /etc/apt/apt.conf.d/50unattended-upgrades
 if [ -d xmr-stak ]; then
@@ -29,7 +29,6 @@ else
 	echo -e "\nXMR-Stak Compilado!\n"
 fi
 cp bin/xmr-stak ~/xmrstak
-wget -P ~/ https://github.com/minerdude/caverna/raw/master/stak.json
 sleep 1
 
 echo -e "Agora as configuracoes finais.\n"
@@ -40,7 +39,7 @@ cd ~
 if grep -q "#alias-xmr" .bash_aliases; then
 	echo -e "\nAliases ja configurado."
 else
-	echo -e "#alias-xmr\nalias update='sudo apt update'\nalias upgrade='sudo apt upgrade'\nalias clean='sudo apt clean && sudo apt autoclean && sudo apt autoremove'\nalias upgradable='apt list --upgradable'\nalias xmrstart='pm2 start stak.json'\nalias xmrstop='pm2 stop stak'" | tee -a ~/.bash_aliases
+	echo -e "#alias-xmr\nalias update='sudo apt update'\nalias upgrade='sudo apt upgrade'\nalias clean='sudo apt clean && sudo apt autoclean && sudo apt autoremove'\nalias upgradable='apt list --upgradable'\nalias xmrstart='~/./xmstak'" | tee -a ~/.bash_aliases
 	source .bashrc
 fi
 #Sysctl Conf
@@ -63,7 +62,6 @@ else
 fi
 
 echo -e "\nFinalizado!\n"
-echo "Agora voce precisa ajustar as configuracoes do xmr-stak."
-./xmrstak
+echo "Agora voce precisa ajustar as configuracoes do xmr-stak. Rode ./xmrstak"
 echo -e "\nAte mais!\n"
 exit 0
